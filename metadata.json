@@ -1,0 +1,6 @@
+{
+  "name": "TechStack Sydney — The Journey",
+  "description": "A scroll-driven journey showing how bespoke websites, web apps, client portals and mobile apps take shape for service businesses.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
