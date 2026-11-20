@@ -28,51 +28,6 @@
     <canvas id="confetti-canvas" class="confetti-canvas" aria-hidden="true"></canvas>
     <a class="skip-link" href="#journey-main">Skip to process</a>
 
-    <!-- Top Bar: Strict 3-Zone Contract -->
-    <header class="site-header" id="site-header">
-      <div class="header-inner">
-        <a href="#top" class="brand-wordmark">
-          <svg
-            class="brand-mark"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            aria-hidden="true"
-          >
-            <rect x="2" y="4" width="14" height="3.5" rx="1.75" fill="url(#brand-grad)" />
-            <rect x="6" y="10.25" width="16" height="3.5" rx="1.75" fill="url(#brand-grad)" opacity="0.88" />
-            <rect x="4" y="16.5" width="12" height="3.5" rx="1.75" fill="url(#brand-grad)" opacity="0.72" />
-            <defs>
-              <linearGradient id="brand-grad" x1="2" y1="4" x2="22" y2="20" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#7C3AED" />
-                <stop offset="1" stop-color="#4338CA" />
-              </linearGradient>
-            </defs>
-          </svg>
-          <span>TechStack Sydney</span>
-        </a>
-
-        <nav class="header-nav" aria-label="Build process stages">
-          <a href="#stage-discovery" class="nav-link">Discovery</a>
-          <a href="#stage-preparation" class="nav-link">Preparation</a>
-          <a href="#stage-build" class="nav-link">Build</a>
-          <a href="#stage-testing" class="nav-link">Testing</a>
-          <a href="#stage-golive" class="nav-link">Deployed</a>
-        </nav>
-
-        <div class="header-action">
-          <a href="#stage-golive" class="btn-header-cta">Book a Call</a>
-        </div>
-      </div>
-
-      <div class="header-accent-track" aria-hidden="true">
-        <div class="header-accent-inner">
-          <div class="scroll-progress-line" id="scroll-progress-line"></div>
-        </div>
-      </div>
-    </header>
-
     <main id="journey-main" class="journey-stage">
       <!-- Sweeping Mathematical Spine: Glowing White Orb -> Purple -> Grey -> Fade Out -->
       <svg class="journey-svg" id="journey-svg" aria-hidden="true">
@@ -89,15 +44,12 @@
             <stop offset="78%" stop-color="#8b5cf6" stop-opacity="0.55" />
             <stop offset="100%" stop-color="#7c3aed" stop-opacity="0.95" />
           </linearGradient>
-          <mask id="journey-below-cue-mask">
-            <rect id="journey-mask-rect" x="0" y="0" width="100%" height="100%" fill="#ffffff" />
-          </mask>
         </defs>
-        <path id="journey-purple-glow" class="journey-purple-glow" d="" fill="none" stroke="url(#purple-glow-grad)" mask="url(#journey-below-cue-mask)" />
-        <path id="journey-guide-path" class="journey-comet-path" d="" fill="none" stroke="url(#trail-comet-grad)" mask="url(#journey-below-cue-mask)" />
+        <path id="journey-purple-glow" class="journey-purple-glow" d="" fill="none" stroke="url(#purple-glow-grad)" />
+        <path id="journey-guide-path" class="journey-comet-path" d="" fill="none" stroke="url(#trail-comet-grad)" />
       </svg>
 
-      <!-- Motion-blurred slate circle + 6-dot RGB-fringed lighter tail -->
+      <!-- Motion-blurred white circle + 6-dot RGB-fringed lighter tail -->
       <div class="light-runner-layer" id="light-runner-layer" aria-hidden="true">
         <span class="trail-dot" data-trail-index="5"></span>
         <span class="trail-dot" data-trail-index="4"></span>
@@ -111,65 +63,49 @@
       </div>
 
       <!-- =========================================================
-           OPENING
+           STAGE 1: ONE FOCUSED CALL. TOTAL CLARITY.
            ========================================================= -->
-      <section class="hero-intro is-revealed" id="top">
-        <div class="stage-container hero-intro-inner">
-          <h1 class="hero-headline pop-headline">What if there was a better way?</h1>
-          <div class="hero-actions">
-            <a href="#stage-discovery" class="btn-primary">Explore the 5 stages</a>
-          </div>
-          <div class="hero-origin-anchor" aria-hidden="true">
-            <span class="axis-anchor" data-waypoint="w-origin"></span>
-            <span class="scroll-cue" id="scroll-cue">Scroll to begin</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- =========================================================
-           STAGE 1: THE MEETING ON TEAMS
-           ========================================================= -->
-      <section class="stage" id="stage-discovery" data-stage="stage-discovery">
+      <section class="stage stage-opening is-revealed" id="stage-discovery" data-stage="stage-discovery">
         <div class="stage-container stage-split">
           <div class="split-slot slot-copy align-right">
-            <h2 class="section-headline pop-headline">The Meeting on teams</h2>
+            <h2 class="section-headline pop-headline">One focused call. Total clarity.</h2>
           </div>
           <div class="axis-slot" aria-hidden="true">
             <span class="axis-anchor offset-left" data-waypoint="w-discovery"></span>
           </div>
           <div class="split-slot slot-visual">
-            <div class="stage-card" aria-label="Discovery call agenda">
-              <div class="card-head">
-                <span class="card-title">Discovery session</span>
-                <span class="card-meta">30 min · Teams</span>
+            <div class="stage-showcase" aria-label="Discovery call agenda">
+              <div class="showcase-head">
+                <span class="showcase-title">Discovery call</span>
+                <span class="showcase-meta">30 min · No obligation</span>
               </div>
               <ol class="minimal-agenda">
                 <li class="agenda-item">
                   <span class="agenda-index">01</span>
                   <div>
-                    <div class="agenda-title">Workflow &amp; bottlenecks</div>
-                    <div class="agenda-sub">Tools, handoffs and daily friction.</div>
+                    <div class="agenda-title">Map how work flows today</div>
+                    <div class="agenda-sub">Pinpoint the bottlenecks slowing your team down.</div>
                   </div>
                 </li>
                 <li class="agenda-item">
                   <span class="agenda-index">02</span>
                   <div>
-                    <div class="agenda-title">Goals &amp; roles</div>
-                    <div class="agenda-sub">KPIs, permissions and approval flows.</div>
+                    <div class="agenda-title">Spot what can run itself</div>
+                    <div class="agenda-sub">Replace repetitive admin, double-entry and follow-ups.</div>
                   </div>
                 </li>
                 <li class="agenda-item">
                   <span class="agenda-index">03</span>
                   <div>
-                    <div class="agenda-title">Systems &amp; data</div>
-                    <div class="agenda-sub">Data structure and integration paths.</div>
+                    <div class="agenda-title">Shape the ideal experience</div>
+                    <div class="agenda-sub">Align on key features, user roles and must-haves.</div>
                   </div>
                 </li>
                 <li class="agenda-item">
                   <span class="agenda-index">04</span>
                   <div>
-                    <div class="agenda-title">Fixed-price plan</div>
-                    <div class="agenda-sub">MVP priorities and clear milestones.</div>
+                    <div class="agenda-title">Receive a tailored fixed-price plan</div>
+                    <div class="agenda-sub">Prepared and agreed before any work begins.</div>
                   </div>
                 </li>
               </ol>
@@ -179,51 +115,75 @@
       </section>
 
       <!-- =========================================================
-           STAGE 2: THE DREAM'S EXPRESSED
+           STAGE 2: YOUR VISION BECOMES THE BLUEPRINT.
            ========================================================= -->
       <section class="stage" id="stage-preparation" data-stage="stage-preparation">
         <div class="stage-container stage-split is-reversed">
           <div class="split-slot slot-visual">
-            <div class="stage-card" aria-label="System architecture blueprint">
-              <div class="card-head">
-                <span class="card-title">System blueprint</span>
-                <span class="card-meta">AWS Sydney · ap-southeast-2</span>
+            <div class="stage-showcase" aria-label="Automated workflow blueprint">
+              <div class="showcase-head">
+                <span class="showcase-title">Workflow blueprint</span>
+                <span class="showcase-meta">Triggers · Logic · Actions</span>
               </div>
               <div class="minimal-arch">
-                <div class="arch-pair">
-                  <div class="arch-tile">
-                    <span class="arch-name">Xero · MYOB</span>
-                    <span class="arch-role">Accounting API</span>
+                <div class="wf-node wf-trigger">
+                  <span class="wf-icon" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                    </svg>
+                  </span>
+                  <div class="wf-copy">
+                    <span class="arch-name">New client inquiry arrives</span>
+                    <span class="arch-role">Web form, booking or portal event</span>
                   </div>
-                  <div class="arch-tile">
-                    <span class="arch-name">Shopify · CRM</span>
-                    <span class="arch-role">Orders &amp; Leads</span>
+                </div>
+
+                <svg class="wf-stem" viewBox="0 0 24 22" aria-hidden="true">
+                  <line x1="12" y1="0" x2="12" y2="18" stroke="rgba(124, 58, 237, 0.42)" stroke-width="1.4" />
+                  <path d="M8.5 14.5 L12 19.5 L15.5 14.5" fill="none" stroke="rgba(124, 58, 237, 0.55)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+
+                <div class="wf-node is-core">
+                  <span class="wf-icon is-accent" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="18" cy="5" r="3" />
+                      <circle cx="6" cy="12" r="3" />
+                      <circle cx="18" cy="19" r="3" />
+                      <path d="M8.6 10.7 L15.4 6.3 M8.6 13.3 L15.4 17.7" />
+                    </svg>
+                  </span>
+                  <div class="wf-copy">
+                    <span class="arch-name">Automated workflow engine</span>
+                    <span class="arch-role">Validates rules, assigns owners &amp; syncs data</span>
                   </div>
                 </div>
 
                 <svg class="arch-lines" viewBox="0 0 260 28" preserveAspectRatio="none" aria-hidden="true">
-                  <path d="M65 0 C65 16, 114 14, 122 28" fill="none" stroke="rgba(124, 58, 237, 0.36)" stroke-width="1.25" />
-                  <path d="M195 0 C195 16, 146 14, 138 28" fill="none" stroke="rgba(124, 58, 237, 0.36)" stroke-width="1.25" />
-                </svg>
-
-                <div class="arch-core-tile">
-                  <span class="arch-name">Custom App Core</span>
-                  <span class="arch-role">REST · Webhooks · Auth</span>
-                </div>
-
-                <svg class="arch-lines" viewBox="0 0 260 28" preserveAspectRatio="none" aria-hidden="true">
-                  <path d="M122 0 C112 14, 80 14, 65 28" fill="none" stroke="rgba(100, 116, 139, 0.34)" stroke-width="1.25" stroke-dasharray="3 4" />
-                  <path d="M138 0 C148 14, 180 14, 195 28" fill="none" stroke="rgba(100, 116, 139, 0.34)" stroke-width="1.25" stroke-dasharray="3 4" />
+                  <path d="M122 0 C112 14, 78 14, 65 26" fill="none" stroke="rgba(124, 58, 237, 0.36)" stroke-width="1.3" />
+                  <path d="M138 0 C148 14, 182 14, 195 26" fill="none" stroke="rgba(124, 58, 237, 0.36)" stroke-width="1.3" />
                 </svg>
 
                 <div class="arch-pair">
-                  <div class="arch-tile is-muted">
-                    <span class="arch-name">PostgreSQL</span>
-                    <span class="arch-role">Primary Data</span>
+                  <div class="arch-tile">
+                    <span class="wf-tile-head">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="3" y="4" width="18" height="18" rx="3" />
+                        <path d="M16 2v4M8 2v4M3 10h18" />
+                      </svg>
+                      <span class="arch-name">Schedule &amp; notify</span>
+                    </span>
+                    <span class="arch-role">Instant client updates</span>
                   </div>
-                  <div class="arch-tile is-muted">
-                    <span class="arch-name">Worker Queue</span>
-                    <span class="arch-role">Sync &amp; Alerts</span>
+                  <div class="arch-tile">
+                    <span class="wf-tile-head">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 12a9 9 0 0 1-15.4 6.4M3 12a9 9 0 0 1 15.4-6.4" />
+                        <polyline points="17 2 18.5 5.8 14.7 6.5" />
+                        <polyline points="7 22 5.5 18.2 9.3 17.5" />
+                      </svg>
+                      <span class="arch-name">Sync records</span>
+                    </span>
+                    <span class="arch-role">Zero manual re-entry</span>
                   </div>
                 </div>
               </div>
@@ -233,40 +193,50 @@
             <span class="axis-anchor offset-right" data-waypoint="w-preparation"></span>
           </div>
           <div class="split-slot slot-copy">
-            <h2 class="section-headline pop-headline">The dream's expressed</h2>
+            <h2 class="section-headline pop-headline">Your vision becomes the blueprint.</h2>
           </div>
         </div>
       </section>
 
       <!-- =========================================================
-           STAGE 3: MILESTONES SET AND THE REST?
+           STAGE 3: CLEAR MILESTONES. ZERO SURPRISES.
            ========================================================= -->
       <section class="stage" id="stage-build" data-stage="stage-build">
         <div class="stage-container stage-split">
           <div class="split-slot slot-copy align-right">
-            <h2 class="section-headline pop-headline">Milestones set and the rest?</h2>
+            <h2 class="section-headline pop-headline">Clear milestones. Zero surprises.</h2>
           </div>
           <div class="axis-slot" aria-hidden="true">
             <span class="axis-anchor offset-left" data-waypoint="w-build"></span>
           </div>
           <div class="split-slot slot-visual">
-            <div class="stage-card" aria-label="Sprint progress milestones">
-              <div class="card-head">
-                <span class="card-title">Field Service Platform</span>
-                <span class="card-meta">Sprint 03 of 06</span>
+            <div class="stage-showcase" aria-label="Build progress roadmap">
+              <div class="showcase-head">
+                <span class="showcase-title">Your build roadmap</span>
+                <span class="showcase-meta">Milestone 02 of 03</span>
               </div>
               <ul class="milestone-list">
                 <li class="milestone-row is-done">
-                  <span class="milestone-mark" aria-hidden="true">✓</span>
-                  <span class="milestone-name">Core setup &amp; client portal</span>
-                  <span class="milestone-status">Done</span>
+                  <span class="milestone-icon-box" aria-hidden="true">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M20 6 9 17l-5-5" />
+                    </svg>
+                  </span>
+                  <span class="milestone-name">Foundation &amp; team access</span>
+                  <span class="milestone-status">Complete</span>
                 </li>
                 <li class="milestone-row is-current">
-                  <span class="milestone-mark" aria-hidden="true">→</span>
+                  <span class="milestone-icon-box" aria-hidden="true">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                      <polyline points="2 12 12 17 22 12" />
+                      <polyline points="2 17 12 22 22 17" />
+                    </svg>
+                  </span>
                   <div class="milestone-body">
                     <div class="milestone-top">
-                      <span class="milestone-name">Dispatch &amp; scheduling</span>
-                      <span class="milestone-status">4 / 7 tasks</span>
+                      <span class="milestone-name">Core workflows &amp; automation</span>
+                      <span class="milestone-status">In build · 60%</span>
                     </div>
                     <div class="milestone-track" aria-hidden="true">
                       <span class="milestone-fill"></span>
@@ -274,9 +244,16 @@
                   </div>
                 </li>
                 <li class="milestone-row">
-                  <span class="milestone-mark" aria-hidden="true">○</span>
-                  <span class="milestone-name">Mobile app, Xero sync &amp; go live</span>
-                  <span class="milestone-status">Next</span>
+                  <span class="milestone-icon-box" aria-hidden="true">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09Z" />
+                      <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2Z" />
+                      <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+                      <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+                    </svg>
+                  </span>
+                  <span class="milestone-name">Client testing, polish &amp; launch</span>
+                  <span class="milestone-status">Up next</span>
                 </li>
               </ul>
             </div>
@@ -285,49 +262,51 @@
       </section>
 
       <!-- =========================================================
-           STAGE 4: WE CODE IT.. YOU TEST IT
+           STAGE 4: WE CODE IT. YOU TEST IT LIVE.
            ========================================================= -->
       <section class="stage" id="stage-testing" data-stage="stage-testing">
         <div class="stage-container stage-split is-reversed">
           <div class="split-slot slot-visual">
-            <div class="stage-card" aria-label="Working preview and live feedback">
-              <div class="card-head">
-                <span class="card-title">Today’s dispatch preview</span>
-                <span class="card-meta">Tuesday · 19 May</span>
+            <div class="stage-showcase" aria-label="Interactive build and client test preview">
+              <div class="showcase-head">
+                <span class="showcase-title">Build &amp; test loop</span>
+                <span class="showcase-meta" id="testing-stage-meta">Staging v2 · Live</span>
               </div>
-              <div class="dispatch-list" id="dispatch-list">
-                <div class="dispatch-row is-priority" data-job="urgent">
-                  <span class="dispatch-time">08:30</span>
-                  <div class="dispatch-info">
-                    <div class="dispatch-name">Urgent callout</div>
-                    <div class="dispatch-place">Northgate Dental · North Sydney</div>
-                  </div>
-                  <span class="dispatch-state" id="urgent-state-label">Priority top</span>
+
+              <div class="code-preview-block" aria-label="Live application logic">
+                <div class="code-line">
+                  <span class="code-ln">01</span>
+                  <span class="code-txt"><span class="tok-fn">onRequestApproved</span>(client) {</span>
                 </div>
-                <div class="dispatch-row" data-job="preventive">
-                  <span class="dispatch-time">10:00</span>
-                  <div class="dispatch-info">
-                    <div class="dispatch-name">Preventive service</div>
-                    <div class="dispatch-place">Oakridge Bistro · Surry Hills</div>
-                  </div>
-                  <span class="dispatch-state">Scheduled</span>
+                <div class="code-line">
+                  <span class="code-ln">02</span>
+                  <span class="code-txt indent-1"><span class="tok-fn">createWorkflow</span>(client.scope);</span>
                 </div>
-                <div class="dispatch-row" data-job="inspection">
-                  <span class="dispatch-time">13:30</span>
-                  <div class="dispatch-info">
-                    <div class="dispatch-name">Equipment inspection</div>
-                    <div class="dispatch-place">Harbour Electrical · Pyrmont</div>
-                  </div>
-                  <span class="dispatch-state">Scheduled</span>
+                <div class="code-line is-editable" id="code-dynamic-line">
+                  <span class="code-ln">03</span>
+                  <span class="code-txt indent-1" id="code-dynamic-text"><span class="tok-fn">notifyClient</span>(<span class="tok-str">"Ready + team alerted"</span>);</span>
+                </div>
+                <div class="code-line">
+                  <span class="code-ln">04</span>
+                  <span class="code-txt">}</span>
                 </div>
               </div>
-              <div class="sheet-feedback-bar">
-                <div class="feedback-note">
-                  <span class="feedback-quote-inline">“Could urgent jobs appear first?”</span>
-                  <span class="feedback-result" id="feedback-status-title">Updated in preview</span>
+
+              <div class="code-bridge" aria-hidden="true">
+                <svg width="14" height="18" viewBox="0 0 14 18" fill="none">
+                  <line x1="7" y1="0" x2="7" y2="14" stroke="rgba(124, 58, 237, 0.4)" stroke-width="1.35" />
+                  <path d="M3.5 11L7 15.5L10.5 11" stroke="rgba(124, 58, 237, 0.55)" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span>Pushed straight to your preview link</span>
+              </div>
+
+              <div class="test-loop-panel">
+                <div class="test-note-row">
+                  <span class="test-quote">“Can my team lead get notified too?”</span>
+                  <span class="test-outcome" id="testing-outcome-label">Updated in staging — client + lead alerted</span>
                 </div>
                 <button type="button" class="btn-preview-toggle" id="preview-order-toggle">
-                  Compare before
+                  Compare before tweak
                 </button>
               </div>
             </div>
@@ -336,29 +315,29 @@
             <span class="axis-anchor offset-right" data-waypoint="w-testing"></span>
           </div>
           <div class="split-slot slot-copy">
-            <h2 class="section-headline pop-headline">We code it.. you test it</h2>
+            <h2 class="section-headline pop-headline">We code it. You test it live.</h2>
           </div>
         </div>
       </section>
 
       <!-- =========================================================
-           STAGE 5: DEPLOYED
+           STAGE 5: LIVE, TESTED, AND ALL YOURS.
            ========================================================= -->
       <section class="stage stage-golive" id="stage-golive" data-stage="stage-golive">
         <div class="stage-container golive-inner">
           <div class="golive-title-row">
             <span class="axis-anchor golive-anchor" data-waypoint="w-golive" aria-hidden="true"></span>
-            <h2 class="section-headline golive-headline pop-headline">Deployed</h2>
+            <h2 class="section-headline golive-headline pop-headline">Live, tested, and all yours.</h2>
           </div>
 
           <div class="golive-summary-bar" aria-label="Launch readiness summary">
             <div class="summary-metric">
-              <span class="summary-value">24</span>
-              <span class="summary-label">Jobs today</span>
+              <span class="summary-value">100%</span>
+              <span class="summary-label">Tested with your team</span>
             </div>
             <div class="summary-metric">
-              <span class="summary-value">92%</span>
-              <span class="summary-label">On schedule</span>
+              <span class="summary-value">Day 1</span>
+              <span class="summary-label">Training &amp; handover</span>
             </div>
             <div class="mini-bars" aria-hidden="true">
               <span style="--bar-h: 42%"></span>
@@ -369,11 +348,11 @@
               <span style="--bar-h: 84%"></span>
               <span style="--bar-h: 96%"></span>
             </div>
-            <div class="summary-handover">Quality checked · Team handover ready</div>
+            <div class="summary-handover">Live in production · Full ownership, guides and ongoing support.</div>
           </div>
 
           <div class="next-step-panel">
-            <h3 class="next-step-title">Book your 30-minute discovery call</h3>
+            <h3 class="next-step-title">Ready to map out your build?</h3>
             <form class="project-form" id="project-form" novalidate>
               <div class="form-row-2">
                 <div class="form-field">
@@ -382,27 +361,27 @@
                   <span class="field-error" id="error-name" aria-live="polite"></span>
                 </div>
                 <div class="form-field">
-                  <label for="business-type">Business type</label>
+                  <label for="business-type">What are you building?</label>
                   <select id="business-type" name="businessType">
-                    <option value="Trades & Services">Trades &amp; Services</option>
-                    <option value="Gym or Coaching">Gym or Coaching</option>
-                    <option value="Beauty & Wellness">Beauty &amp; Wellness</option>
-                    <option value="Other Service Business">Other Service Business</option>
+                    <option value="Workflow & Automation">Workflow &amp; Automation</option>
+                    <option value="Custom Web Platform">Custom Web Platform</option>
+                    <option value="Client Portal or Booking App">Client Portal or Booking App</option>
+                    <option value="Website & System Integrations">Website &amp; System Integrations</option>
                   </select>
                 </div>
               </div>
 
               <div class="form-field">
                 <label for="owner-email">Email address</label>
-                <input type="email" id="owner-email" name="email" placeholder="you@business.com.au" autocomplete="email" required />
+                <input type="email" id="owner-email" name="email" placeholder="you@company.com.au" autocomplete="email" required />
                 <span class="field-error" id="error-email" aria-live="polite"></span>
               </div>
 
-              <button type="submit" class="btn-primary btn-submit">Request 30-minute Teams call</button>
+              <button type="submit" class="btn-primary btn-submit">Book my 30-minute Teams call</button>
             </form>
 
             <div class="form-confirmation" id="form-confirmation" hidden>
-              <h4 class="confirmation-title">Discovery call request prepared</h4>
+              <h4 class="confirmation-title">Discovery call request ready</h4>
               <p class="confirmation-body" id="confirmation-body"></p>
               <button type="button" class="btn-text-link" id="reset-form-btn">Edit details</button>
             </div>
@@ -415,12 +394,12 @@
       <div class="footer-inner">
         <div class="footer-brand">
           <span class="footer-name">TechStack Sydney</span>
-          <span class="footer-meta">Websites · Web &amp; Mobile Apps · Middleware &amp; Automation · Sydney</span>
+          <span class="footer-meta">Websites · Web &amp; Mobile Apps · Workflow Automation · Sydney</span>
         </div>
         <nav class="footer-nav" aria-label="Footer navigation">
           <a href="#stage-discovery">Discovery</a>
-          <a href="#stage-preparation">Preparation</a>
-          <a href="#stage-build">Build</a>
+          <a href="#stage-preparation">Blueprint</a>
+          <a href="#stage-build">Milestones</a>
           <a href="#stage-testing">Testing</a>
           <a href="#stage-golive">Deployed</a>
         </nav>

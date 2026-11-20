@@ -20,8 +20,6 @@
   const purpleGlowGrad = document.getElementById('purple-glow-grad');
   const lightOrb = document.getElementById('light-orb');
   const trailDots = Array.from(document.querySelectorAll('.trail-dot'));
-  const progressLine = document.getElementById('scroll-progress-line');
-  const scrollCueEl = document.getElementById('scroll-cue');
   const backdropCanvas = document.getElementById('journey-backdrop-canvas');
 
   const TRAIL_OPACITIES = [0.78, 0.62, 0.46, 0.32, 0.18, 0.08];
@@ -31,14 +29,13 @@
 
   let pathTotalLength = 0;
   let waypointPositions = [];
-  let scrollCueBottomY = 0;
+  let introRestY = 120;
   let targetDrawLen = 0;
   let smoothDrawLen = 0;
   let trailAnchorLen = 0;
   let trailInitialized = false;
   let runnerRafId = 0;
   let backdropRafId = 0;
-  let lastRevealedId = '';
   let currentScrollProgress = 0;
   let lastOrbViewportX = -999;
   let lastOrbViewportY = -999;
@@ -68,7 +65,6 @@
 
   function getOrderedWaypoints() {
     const order = [
-      'w-origin',
       'w-discovery',
       'w-preparation',
       'w-build',
@@ -87,7 +83,7 @@
     const headlineEl = stageSection.querySelector('.section-headline');
     const visualEl =
       stageSection.querySelector(
-        '.slot-visual .stage-card, .slot-visual .minimal-agenda, .slot-visual .minimal-arch, .slot-visual .minimal-sheet'
+        '.slot-visual .stage-showcase, .slot-visual .minimal-agenda, .slot-visual .minimal-arch'
       ) || stageSection.querySelector('.slot-visual');
 
     if (!headlineEl && !visualEl) return null;
@@ -144,18 +140,6 @@
     svgEl.setAttribute('width', String(width));
     svgEl.setAttribute('height', String(height));
 
-    if (scrollCueEl) {
-      const cueRect = scrollCueEl.getBoundingClientRect();
-      scrollCueBottomY = cueRect.bottom - stageRect.top;
-    }
-
-    const maskRect = document.getElementById('journey-mask-rect');
-    if (maskRect) {
-      const maskTop = Math.max(0, scrollCueBottomY + 10);
-      maskRect.setAttribute('y', maskTop.toFixed(1));
-      maskRect.setAttribute('height', Math.max(0, height - maskTop).toFixed(1));
-    }
-
     const nodes = getOrderedWaypoints();
     if (nodes.length < 2) return;
 
@@ -172,10 +156,7 @@
     waypointPositions = points;
 
     const stageIds = ['stage-discovery', 'stage-preparation', 'stage-build', 'stage-testing'];
-    const obstacles = [
-      null,
-      ...stageIds.map((id) => getStageObstacle(document.getElementById(id), stageRect)),
-    ];
+    const obstacles = stageIds.map((id) => getStageObstacle(document.getElementById(id), stageRect));
 
     const goliveHeadline = document.querySelector('#stage-golive .golive-headline');
     const goliveHeadlineRect = goliveHeadline ? goliveHeadline.getBoundingClientRect() : null;
@@ -193,26 +174,29 @@
       anchors.push({ x, y: safeY });
     }
 
-    const originPt = points[0];
     const golivePt = points[points.length - 1];
-    const cueClearY = Math.max(originPt.y + 8, scrollCueBottomY + 18);
+    const obs0 = obstacles[0];
+    const topStartY = 8;
+    introRestY = obs0
+      ? Math.max(76, Math.min(obs0.top - 48, Math.round(obs0.top * 0.72)))
+      : 120;
 
-    pushAnchor(isMobile ? centerX : originPt.x, originPt.y);
-    pushAnchor(isMobile ? centerX : originPt.x, cueClearY);
+    pushAnchor(centerX, topStartY);
+    pushAnchor(centerX, introRestY);
 
     if (isMobile) {
       const goliveTargetY = goliveHeadlineRect
         ? Math.min(golivePt.y, goliveHeadlineRect.top - stageRect.top - 22)
         : golivePt.y;
 
-      for (let s = 1; s <= 4; s++) {
+      for (let s = 0; s <= 3; s++) {
         const wPt = points[s];
         const obs = obstacles[s];
         const prevY = anchors[anchors.length - 1].y;
-        const rawLandY = obs ? Math.min(wPt.y, obs.top - 40) : wPt.y;
+        const rawLandY = obs ? Math.min(wPt.y, obs.top - (s === 0 ? 28 : 40)) : wPt.y;
         const landY = Math.max(prevY + 12, rawLandY);
 
-        if (landY - prevY >= 92) {
+        if (s > 0 && landY - prevY >= 92) {
           const swingDir = s % 2 === 1 ? 1 : -1;
           const amp = Math.max(68, centerX - 24);
           pushAnchor(centerX + swingDir * amp, (prevY + landY) / 2);
@@ -221,7 +205,7 @@
         pushAnchor(centerX, landY);
 
         if (obs) {
-          const dir = s % 2 === 1 ? -1 : 1;
+          const dir = s % 2 === 1 ? 1 : -1;
           const desiredRight = obs.right + 30;
           const rightX =
             desiredRight <= width - 16 ? desiredRight : Math.max(desiredRight, width + 22);
@@ -235,9 +219,9 @@
           pushAnchor(detourX, topEdgeY);
           pushAnchor(detourX, botEdgeY);
 
-          const nextObs = s < 4 ? obstacles[s + 1] : null;
+          const nextObs = s < 3 ? obstacles[s + 1] : null;
           const nextTargetY =
-            s < 4
+            s < 3
               ? nextObs
                 ? Math.min(points[s + 1].y, nextObs.top - 40)
                 : points[s + 1].y
@@ -255,10 +239,9 @@
       const swingMargin = 44;
       const amplitude = Math.min(340, Math.max(150, width * 0.31));
 
-      for (let s = 1; s <= 4; s++) {
+      for (let s = 0; s <= 3; s++) {
         const wPt = points[s];
         const obs = obstacles[s];
-        const prevY = anchors[anchors.length - 1].y;
 
         let spineX = wPt.x;
         if (obs && obs.corridorLeft !== null && obs.corridorRight !== null) {
@@ -270,11 +253,12 @@
           }
         }
 
+        const prevY = anchors[anchors.length - 1].y;
         const rawEntryY = obs ? Math.min(wPt.y - 12, obs.top - 24) : wPt.y - 12;
         const entryY = Math.max(prevY + 16, rawEntryY);
         const rawExitY = obs ? Math.max(wPt.y + 12, obs.bottom + 24) : wPt.y + 12;
 
-        if (entryY - prevY >= 56) {
+        if (s > 0 && entryY - prevY >= 56) {
           const dir = s % 2 === 1 ? 1 : -1;
           const swingX = Math.max(
             swingMargin,
@@ -386,19 +370,18 @@
       : Math.min(1, (velocity * 0.55 + absGap * 0.45) / 30);
     const blurPx = prefersReducedMotion.matches ? 0 : energy * 2.4;
 
-    const cueCutoffY = scrollCueBottomY + 12;
-    const pastScrollCue = orbPt.y > cueCutoffY ? 1 : 0;
     let runnerOpacity = 0;
     if (!prefersReducedMotion.matches) {
+      const startFade = smoothDrawLen <= 1 ? 0 : Math.min(1, smoothDrawLen / 18);
       const distToEnd = Math.max(0, pathTotalLength - smoothDrawLen);
       const endFade = distToEnd >= 115 ? 1 : Math.max(0, (distToEnd - 12) / 103);
-      runnerOpacity = pastScrollCue * endFade;
+      runnerOpacity = startFade * endFade;
     }
 
     const segLen = Math.min(activeCometLen, smoothDrawLen);
     const startGap = Math.max(0, smoothDrawLen - segLen);
     const showComet =
-      !prefersReducedMotion.matches && pastScrollCue === 1 && segLen >= 4 && runnerOpacity > 0.01;
+      !prefersReducedMotion.matches && segLen >= 4 && runnerOpacity > 0.01;
 
     const dashPattern = `${segLen.toFixed(1)} ${(pathTotalLength + 1000).toFixed(1)}`;
     const segOffset = (-startGap).toFixed(1);
@@ -457,14 +440,9 @@
       }
 
       const pt = guidePath.getPointAtLength(dotLen);
-      if (pt.y <= cueCutoffY) {
-        dotEl.style.opacity = '0';
-        return;
-      }
-
-      const cueFade = Math.min(1, (pt.y - cueCutoffY) / 18);
+      const startDotFade = Math.min(1, dotLen / 24);
       const scale = Math.max(0.35, 0.92 - idx * 0.11);
-      const opacity = (TRAIL_OPACITIES[idx] ?? 0) * catchFade * cueFade;
+      const opacity = (TRAIL_OPACITIES[idx] ?? 0) * catchFade * startDotFade * runnerOpacity;
 
       dotEl.style.opacity = opacity.toFixed(3);
       dotEl.style.transform = `translate3d(${pt.x.toFixed(1)}px, ${pt.y.toFixed(1)}px, 0) translate(-50%, -50%) scale(${scale.toFixed(2)})`;
@@ -489,9 +467,13 @@
     const viewportH = window.innerHeight || 800;
     const midY = viewportH * SCREEN_MID_RATIO;
     const stages = Array.from(document.querySelectorAll('.stage[data-stage]'));
-    let deepestRevealed = '';
 
     stages.forEach((sec) => {
+      if (sec.id === 'stage-discovery') {
+        sec.classList.add('is-revealed');
+        return;
+      }
+
       const anchorEl = getSectionAnchorEl(sec);
       if (!anchorEl) return;
 
@@ -508,15 +490,7 @@
       }
 
       sec.classList.toggle('is-revealed', shouldReveal);
-      if (shouldReveal) {
-        deepestRevealed = sec.getAttribute('data-stage') || '';
-      }
     });
-
-    if (deepestRevealed !== lastRevealedId) {
-      lastRevealedId = deepestRevealed;
-      updateActiveNav();
-    }
   }
 
   // =========================================================================
@@ -760,11 +734,7 @@
     const scrollProgress = Math.max(0, Math.min(1, window.scrollY / maxScroll));
     currentScrollProgress = scrollProgress;
 
-    if (progressLine) {
-      progressLine.style.setProperty('--scroll-progress', Math.max(0.03, scrollProgress).toFixed(4));
-    }
-
-    const allSections = Array.from(document.querySelectorAll('.hero-intro, .stage'));
+    const allSections = Array.from(document.querySelectorAll('.stage'));
 
     if (prefersReducedMotion.matches) {
       targetDrawLen = pathTotalLength;
@@ -776,27 +746,29 @@
       return;
     }
 
-    const originY = waypointPositions[0]?.y || 0;
     const arrivalY = waypointPositions[waypointPositions.length - 1]?.y || stageEl.offsetHeight;
     const midScreenYInStage = -stageRect.top + viewportH * SCREEN_MID_RATIO;
 
-    const startBlend = Math.min(1, window.scrollY / 110);
-    const rawTargetY = originY + (midScreenYInStage - originY) * startBlend;
+    const startBlend = Math.min(1, window.scrollY / 140);
+    const rawTargetY = Math.max(introRestY, introRestY + (midScreenYInStage - introRestY) * startBlend);
     const arrivalBlend = scrollProgress > 0.9 ? (scrollProgress - 0.9) / 0.1 : 0;
-    const clampedY = Math.max(originY, Math.min(arrivalY, rawTargetY));
+    const clampedY = Math.max(introRestY, Math.min(arrivalY, rawTargetY));
     const targetYInStage = clampedY + (arrivalY - clampedY) * arrivalBlend;
 
     const drawLen =
-      window.scrollY <= 4
-        ? 0
-        : scrollProgress >= 0.992
-          ? pathTotalLength
-          : Math.min(pathTotalLength, Math.max(0, findLengthAtY(targetYInStage)));
+      scrollProgress >= 0.992
+        ? pathTotalLength
+        : Math.min(pathTotalLength, Math.max(0, findLengthAtY(targetYInStage)));
 
     targetDrawLen = drawLen;
     if (!trailInitialized) {
-      smoothDrawLen = drawLen;
-      trailAnchorLen = drawLen;
+      if (window.scrollY <= 4) {
+        smoothDrawLen = 0;
+        trailAnchorLen = 0;
+      } else {
+        smoothDrawLen = drawLen;
+        trailAnchorLen = drawLen;
+      }
       trailInitialized = true;
     }
 
@@ -826,7 +798,7 @@
         const maxScroll = Math.max(document.documentElement.scrollHeight - viewportH, 0);
 
         let desiredY = 0;
-        if (target.id === 'top') {
+        if (target.id === 'stage-discovery') {
           desiredY = 0;
         } else if (target.id === 'stage-golive') {
           desiredY = maxScroll;
@@ -940,14 +912,6 @@
     confettiFrameId = window.requestAnimationFrame(tick);
   }
 
-  function updateActiveNav() {
-    const navLinks = document.querySelectorAll('.header-nav .nav-link');
-    navLinks.forEach((link) => {
-      const href = link.getAttribute('href') || '';
-      link.classList.toggle('is-active', lastRevealedId !== '' && href === `#${lastRevealedId}`);
-    });
-  }
-
   let scrollTicking = false;
   window.addEventListener(
     'scroll',
@@ -1031,31 +995,39 @@
   }
 
   // =========================================================================
-  // 8. Stage 4: Interactive Dispatch Order Toggle
+  // 8. Stage 4: Interactive Code & Client Testing Loop
   // =========================================================================
 
   const previewToggleBtn = document.getElementById('preview-order-toggle');
-  const dispatchList = document.getElementById('dispatch-list');
-  const urgentLabel = document.getElementById('urgent-state-label');
-  const feedbackTitle = document.getElementById('feedback-status-title');
+  const dynamicCodeLine = document.getElementById('code-dynamic-line');
+  const dynamicCodeText = document.getElementById('code-dynamic-text');
+  const testingMeta = document.getElementById('testing-stage-meta');
+  const testingOutcome = document.getElementById('testing-outcome-label');
 
-  if (previewToggleBtn && dispatchList) {
-    let prioritized = true;
+  if (previewToggleBtn && dynamicCodeText) {
+    let feedbackApplied = true;
     previewToggleBtn.addEventListener('click', () => {
-      prioritized = !prioritized;
-      const urgentRow = dispatchList.querySelector('[data-job="urgent"]');
-      if (urgentRow) {
-        if (prioritized) {
-          dispatchList.prepend(urgentRow);
-          urgentRow.classList.add('is-priority');
-        } else {
-          dispatchList.append(urgentRow);
-          urgentRow.classList.remove('is-priority');
+      feedbackApplied = !feedbackApplied;
+
+      if (feedbackApplied) {
+        dynamicCodeText.innerHTML =
+          '<span class="tok-fn">notifyClient</span>(<span class="tok-str">"Ready + team alerted"</span>);';
+        if (dynamicCodeLine) dynamicCodeLine.classList.add('is-editable');
+        if (testingMeta) testingMeta.textContent = 'Staging v2 · Live';
+        if (testingOutcome) {
+          testingOutcome.textContent = 'Updated in staging — client + lead alerted';
         }
+        previewToggleBtn.textContent = 'Compare before tweak';
+      } else {
+        dynamicCodeText.innerHTML =
+          '<span class="tok-fn">notifyClient</span>(<span class="tok-str">"Ready for kickoff"</span>);';
+        if (dynamicCodeLine) dynamicCodeLine.classList.remove('is-editable');
+        if (testingMeta) testingMeta.textContent = 'Staging v1 · Initial';
+        if (testingOutcome) {
+          testingOutcome.textContent = 'Original build — client notified only';
+        }
+        previewToggleBtn.textContent = 'Apply feedback to code';
       }
-      if (urgentLabel) urgentLabel.textContent = prioritized ? 'Priority top' : 'Scheduled';
-      if (feedbackTitle) feedbackTitle.textContent = prioritized ? 'Updated in preview' : 'Original queue';
-      previewToggleBtn.textContent = prioritized ? 'Compare before' : 'Apply feedback';
     });
   }
 
