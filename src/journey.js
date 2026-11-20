@@ -87,7 +87,7 @@
     const headlineEl = stageSection.querySelector('.section-headline');
     const visualEl =
       stageSection.querySelector(
-        '.slot-visual .minimal-agenda, .slot-visual .minimal-arch, .slot-visual .minimal-sheet'
+        '.slot-visual .stage-card, .slot-visual .minimal-agenda, .slot-visual .minimal-arch, .slot-visual .minimal-sheet'
       ) || stageSection.querySelector('.slot-visual');
 
     if (!headlineEl && !visualEl) return null;

@@ -21,15 +21,18 @@
   --indigo-700: #4338ca;
 
   /* Borders & Elevation */
-  --border-hairline: rgba(30, 27, 75, 0.1);
-  --shadow-surface: 0 22px 48px -26px rgba(20, 17, 41, 0.14);
+  --border-hairline: rgba(20, 17, 41, 0.09);
+  --border-accent-soft: rgba(124, 58, 237, 0.28);
+  --shadow-surface: 0 18px 40px -28px rgba(20, 17, 41, 0.14);
 
   /* Typography — Strictly Plus Jakarta Sans */
   --font-display: "Plus Jakarta Sans", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --font-body: "Plus Jakarta Sans", "Avenir Next", "Segoe UI", system-ui, sans-serif;
 
-  /* Radii & Motion */
-  --radius-md: 14px;
+  /* Radii & Motion (Nested math: r_inner = r_outer - padding = 16 - 8 = 8px) */
+  --radius-card: 16px;
+  --radius-md: 16px;
+  --radius-inner: 8px;
   --radius-sm: 8px;
   --ease-settle: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-focus: cubic-bezier(0.22, 1, 0.36, 1);
@@ -230,13 +233,13 @@ select {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 40px;
+  min-height: 44px;
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--ink-on-accent);
   background: linear-gradient(135deg, var(--violet-600), var(--indigo-600));
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-inner);
   white-space: nowrap;
   flex-shrink: 0;
   transition: transform 160ms var(--ease-settle), filter 160ms var(--ease-settle);
@@ -421,14 +424,14 @@ select {
 
 .hero-headline {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 7.2vw, 5rem);
+  font-size: clamp(2.25rem, 6.5vw, 4.5rem);
   font-weight: 700;
-  line-height: 1.06;
+  line-height: 1.08;
   letter-spacing: -0.035em;
   text-wrap: balance;
   max-width: 14ch;
   padding-block: 0.08em;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.5rem;
   transform-origin: center center;
 }
 
@@ -616,8 +619,9 @@ select {
 .slot-visual {
   order: 3;
   width: 100%;
-  max-width: 480px;
-  margin-top: 0.75rem;
+  max-width: 440px;
+  margin-top: 0.85rem;
+  margin-inline: auto;
   min-width: 0;
   text-align: left;
   opacity: 0;
@@ -638,40 +642,72 @@ select {
 
 .section-headline {
   font-family: var(--font-display);
-  font-size: clamp(2.1rem, 5.2vw, 3.85rem);
+  font-size: clamp(1.75rem, 4.4vw, 3.35rem);
   font-weight: 700;
-  line-height: 1.08;
+  line-height: 1.12;
   letter-spacing: -0.03em;
   text-wrap: balance;
-  max-width: 14ch;
-  padding-block: 0.08em;
+  max-width: 15ch;
+  padding-block: 0.06em;
   transform-origin: center center;
 }
 
 /* ==========================================================================
-   Minimal Editorial Stage Demos (Less Is More · Hairline · Responsive)
+   Unified Stage Card System (Consistent Geometry, Radius Math & Hierarchy)
    ========================================================================== */
 
-/* Stage 1: Unboxed Discovery Agenda List */
+.stage-card {
+  width: 100%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-card);
+  padding: 1.25rem;
+}
+
+.card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.35rem 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(20, 17, 41, 0.08);
+}
+
+.card-title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--ink-primary);
+  line-height: 1.3;
+}
+
+.card-meta {
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-muted);
+}
+
+/* Stage 1: Discovery Agenda List */
 .minimal-agenda {
   list-style: none;
   margin: 0;
   padding: 0;
-  max-width: 400px;
-  margin-inline: auto;
 }
 
 .agenda-item {
   display: grid;
-  grid-template-columns: 28px minmax(0, 1fr);
+  grid-template-columns: 26px minmax(0, 1fr);
   align-items: baseline;
-  gap: 0.75rem;
-  padding: 0.8rem 0;
-  border-bottom: 1px solid rgba(20, 17, 41, 0.08);
+  gap: 0.65rem;
+  padding: 0.72rem 0;
+  border-bottom: 1px solid rgba(20, 17, 41, 0.06);
 }
 
-.agenda-item:first-child {
-  border-top: 1px solid rgba(20, 17, 41, 0.08);
+.agenda-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0.1rem;
 }
 
 .agenda-index {
@@ -682,10 +718,10 @@ select {
 }
 
 .agenda-title {
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: var(--ink-primary);
-  line-height: 1.3;
+  line-height: 1.35;
 }
 
 .agenda-sub {
@@ -697,8 +733,7 @@ select {
 
 /* Stage 2: Minimal Architecture Flow */
 .minimal-arch {
-  max-width: 390px;
-  margin-inline: auto;
+  margin-top: 0.9rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -708,7 +743,7 @@ select {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.65rem;
+  gap: 0.6rem;
 }
 
 .arch-tile,
@@ -717,32 +752,29 @@ select {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 0.65rem 0.75rem;
-  background: rgba(255, 255, 255, 0.78);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(20, 17, 41, 0.09);
-  border-radius: 10px;
+  padding: 0.6rem 0.55rem;
+  background: var(--bg-canvas);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-inner);
   min-width: 0;
 }
 
 .arch-tile.is-muted {
-  background: rgba(248, 247, 252, 0.72);
-  border-color: rgba(20, 17, 41, 0.07);
+  border-color: rgba(20, 17, 41, 0.06);
 }
 
 .arch-core-tile {
   width: 100%;
-  max-width: 220px;
-  background: rgba(255, 255, 255, 0.94);
-  border-color: rgba(124, 58, 237, 0.32);
-  box-shadow: 0 12px 28px -20px rgba(79, 70, 229, 0.35);
+  max-width: 224px;
+  background: var(--bg-surface);
+  border-color: var(--border-accent-soft);
 }
 
 .arch-name {
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   color: var(--ink-primary);
-  line-height: 1.25;
+  line-height: 1.3;
 }
 
 .arch-role {
@@ -754,43 +786,8 @@ select {
 .arch-lines {
   width: 100%;
   max-width: 260px;
-  height: 28px;
+  height: 24px;
   display: block;
-}
-
-/* Stage 3 & Stage 4: Single Clean Editorial Sheet */
-.minimal-sheet {
-  max-width: 430px;
-  margin-inline: auto;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(20, 17, 41, 0.09);
-  border-radius: var(--radius-md);
-  padding: 1.1rem 1.2rem;
-  box-shadow: 0 16px 38px -28px rgba(20, 17, 41, 0.16);
-}
-
-.sheet-head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.5rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid rgba(20, 17, 41, 0.08);
-}
-
-.sheet-title {
-  font-size: 0.9375rem;
-  font-weight: 700;
-  color: var(--ink-primary);
-}
-
-.sheet-meta {
-  font-size: 0.75rem;
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-  color: var(--ink-muted);
 }
 
 /* Stage 3: Milestones List */
@@ -811,7 +808,7 @@ select {
 
 .milestone-row:last-child {
   border-bottom: none;
-  padding-bottom: 0.15rem;
+  padding-bottom: 0.1rem;
 }
 
 .milestone-row.is-current {
@@ -840,16 +837,17 @@ select {
 
 .milestone-top {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: 0.25rem 0.5rem;
 }
 
 .milestone-name {
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--ink-primary);
-  line-height: 1.3;
+  line-height: 1.35;
 }
 
 .milestone-status {
@@ -866,11 +864,11 @@ select {
 }
 
 .milestone-track {
-  height: 3px;
+  height: 4px;
   border-radius: 999px;
   background: rgba(124, 58, 237, 0.12);
   overflow: hidden;
-  margin-top: 0.48rem;
+  margin-top: 0.5rem;
 }
 
 .milestone-fill {
@@ -885,14 +883,15 @@ select {
 .dispatch-list {
   display: flex;
   flex-direction: column;
+  margin-top: 0.2rem;
 }
 
 .dispatch-row {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: 0.65rem;
-  padding: 0.7rem 0.4rem;
+  gap: 0.6rem;
+  padding: 0.68rem 0.25rem;
   border-bottom: 1px solid rgba(20, 17, 41, 0.06);
   transition: background-color 180ms var(--ease-settle);
 }
@@ -902,11 +901,11 @@ select {
 }
 
 .dispatch-row.is-priority {
-  background: rgba(124, 58, 237, 0.045);
-  border-radius: 8px;
+  background: rgba(124, 58, 237, 0.05);
+  border-radius: var(--radius-inner);
   padding-inline: 0.65rem;
   border-bottom-color: transparent;
-  margin-block: 0.15rem;
+  margin-block: 0.18rem;
 }
 
 .dispatch-time {
@@ -920,7 +919,7 @@ select {
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--ink-primary);
-  line-height: 1.25;
+  line-height: 1.3;
 }
 
 .dispatch-place {
@@ -945,19 +944,18 @@ select {
 
 .sheet-feedback-bar {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.6rem;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.75rem;
   margin-top: 0.55rem;
-  padding-top: 0.75rem;
+  padding-top: 0.85rem;
   border-top: 1px solid rgba(20, 17, 41, 0.08);
 }
 
 .feedback-note {
   display: flex;
   flex-direction: column;
-  gap: 0.1rem;
+  gap: 0.15rem;
   min-width: 0;
 }
 
@@ -974,48 +972,52 @@ select {
 }
 
 .btn-preview-toggle {
-  min-height: 36px;
-  padding: 0.3rem 0.7rem;
-  font-size: 0.75rem;
+  width: 100%;
+  min-height: 44px;
+  padding: 0.55rem 0.9rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   color: var(--indigo-700);
-  background: transparent;
+  background: var(--bg-canvas);
   border: 1px solid rgba(79, 70, 229, 0.24);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-inner);
   cursor: pointer;
   white-space: nowrap;
+  flex-shrink: 0;
   transition: background-color 160ms var(--ease-settle), border-color 160ms var(--ease-settle);
 }
 
 .btn-preview-toggle:hover {
-  background: rgba(79, 70, 229, 0.06);
+  background: rgba(79, 70, 229, 0.08);
   border-color: rgba(79, 70, 229, 0.45);
 }
 
-/* Stage 5: Quiet Launch Summary Strip */
+/* Stage 5: Launch Summary Strip */
 .golive-summary-bar {
   width: 100%;
-  max-width: 520px;
-  display: flex;
-  flex-wrap: wrap;
+  max-width: 440px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: center;
-  gap: 0.85rem 1.35rem;
-  padding: 0.9rem 1.15rem;
-  background: rgba(255, 255, 255, 0.85);
+  text-align: left;
+  gap: 0.85rem 1rem;
+  padding: 1.25rem;
+  background: var(--bg-surface);
   border: 1px solid var(--border-hairline);
-  border-radius: 12px;
+  border-radius: var(--radius-card);
 }
 
 .summary-metric {
   display: flex;
-  align-items: baseline;
-  gap: 0.35rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.12rem;
 }
 
 .summary-value {
-  font-size: 1.0625rem;
+  font-size: 1.25rem;
   font-weight: 700;
+  line-height: 1.1;
   font-variant-numeric: tabular-nums;
   color: var(--ink-primary);
 }
@@ -1029,7 +1031,7 @@ select {
   display: flex;
   align-items: flex-end;
   gap: 3px;
-  height: 22px;
+  height: 24px;
 }
 
 .mini-bars span {
@@ -1040,22 +1042,22 @@ select {
 }
 
 .summary-handover {
-  width: 100%;
+  grid-column: 1 / -1;
   font-size: 0.8125rem;
   color: var(--ink-secondary);
-  padding-top: 0.6rem;
-  border-top: 1px solid rgba(20, 17, 41, 0.07);
+  padding-top: 0.7rem;
+  border-top: 1px solid rgba(20, 17, 41, 0.08);
 }
 
 /* ==========================================================================
-   Stage 5: Deployed (Mobile Centered Everything)
+   Stage 5: Deployed (Balanced Mobile Rhythm & Lead Form Hierarchy)
    ========================================================================== */
 
 .stage-golive {
   display: block;
   min-height: 0;
-  padding-top: clamp(5rem, 15svh, 8.5rem);
-  padding-bottom: clamp(5rem, 16svh, 9rem);
+  padding-top: clamp(4.75rem, 13svh, 8rem);
+  padding-bottom: clamp(4.75rem, 14svh, 8.5rem);
 }
 
 .golive-inner {
@@ -1063,7 +1065,7 @@ select {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 2rem;
+  gap: 1.25rem;
 }
 
 .golive-title-row {
@@ -1072,7 +1074,8 @@ select {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.85rem;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .golive-anchor {
@@ -1085,21 +1088,23 @@ select {
 
 .next-step-panel {
   width: 100%;
-  max-width: 520px;
+  max-width: 440px;
   background: var(--bg-surface);
   border: 1px solid var(--border-hairline);
-  border-radius: var(--radius-md);
-  padding: 1.5rem;
+  border-radius: var(--radius-card);
+  padding: 1.35rem;
   box-shadow: var(--shadow-surface);
-  text-align: center;
+  text-align: left;
 }
 
 .next-step-title {
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: 1.125rem;
   font-weight: 700;
+  letter-spacing: -0.015em;
   color: var(--ink-primary);
-  margin-bottom: 1rem;
+  text-align: center;
+  margin-bottom: 1.1rem;
 }
 
 .project-form {
@@ -1117,8 +1122,8 @@ select {
 .form-field {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 0.3rem;
+  align-items: stretch;
+  gap: 0.35rem;
 }
 
 .form-field label {
@@ -1133,10 +1138,10 @@ select {
   min-height: 44px;
   padding: 0.55rem 0.75rem;
   background: var(--bg-canvas);
-  border: 1px solid rgba(30, 27, 75, 0.18);
-  border-radius: var(--radius-sm);
+  border: 1px solid rgba(30, 27, 75, 0.16);
+  border-radius: var(--radius-inner);
   color: var(--ink-primary);
-  text-align: center;
+  text-align: left;
   transition: border-color 160ms var(--ease-settle), background-color 160ms var(--ease-settle);
 }
 
@@ -1154,12 +1159,14 @@ select {
 
 .btn-submit {
   width: 100%;
+  margin-top: 0.15rem;
 }
 
 .form-confirmation {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   gap: 0.625rem;
 }
 
@@ -1300,6 +1307,7 @@ select {
     grid-row: 1;
     max-width: none;
     margin-top: 0;
+    margin-inline: 0;
     padding-left: 0.75rem;
   }
 
@@ -1321,15 +1329,37 @@ select {
     padding-right: 0.75rem;
   }
 
-  .minimal-agenda,
-  .minimal-arch,
-  .minimal-sheet {
-    margin-inline: 0;
+  .stage-card {
+    padding: 1.5rem;
+    max-width: 440px;
+    margin-right: auto;
+    margin-left: 0;
   }
 
-  .stage-split.is-reversed .minimal-arch,
-  .stage-split.is-reversed .minimal-sheet {
+  .stage-split.is-reversed .stage-card {
     margin-left: auto;
+    margin-right: 0;
+  }
+
+  .agenda-title,
+  .milestone-name,
+  .dispatch-name {
+    font-size: 0.9375rem;
+  }
+
+  .arch-name {
+    font-size: 0.875rem;
+  }
+
+  .sheet-feedback-bar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .btn-preview-toggle {
+    width: auto;
+    min-height: 40px;
   }
 
   .align-right {
@@ -1361,6 +1391,10 @@ select {
     padding-bottom: clamp(5.5rem, 16svh, 9.5rem);
   }
 
+  .golive-inner {
+    gap: 1.5rem;
+  }
+
   .golive-title-row {
     flex-direction: row;
     gap: 1.75rem;
@@ -1376,21 +1410,26 @@ select {
     transform-origin: center center;
   }
 
+  .golive-summary-bar,
   .next-step-panel {
-    text-align: left;
+    max-width: 520px;
   }
 
-  .form-field {
-    align-items: stretch;
+  .golive-summary-bar {
+    padding: 1.25rem 1.5rem;
   }
 
-  .form-field input,
-  .form-field select {
+  .next-step-panel {
+    padding: 1.75rem;
+  }
+
+  .next-step-title {
     text-align: left;
   }
 
   .form-confirmation {
     align-items: flex-start;
+    text-align: left;
   }
 
   .form-row-2 {

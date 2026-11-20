@@ -138,36 +138,42 @@
             <span class="axis-anchor offset-left" data-waypoint="w-discovery"></span>
           </div>
           <div class="split-slot slot-visual">
-            <ol class="minimal-agenda" aria-label="Discovery call agenda">
-              <li class="agenda-item">
-                <span class="agenda-index">01</span>
-                <div>
-                  <div class="agenda-title">Workflow &amp; bottlenecks</div>
-                  <div class="agenda-sub">Tools, handoffs and daily friction.</div>
-                </div>
-              </li>
-              <li class="agenda-item">
-                <span class="agenda-index">02</span>
-                <div>
-                  <div class="agenda-title">Goals &amp; roles</div>
-                  <div class="agenda-sub">KPIs, permissions and approval flows.</div>
-                </div>
-              </li>
-              <li class="agenda-item">
-                <span class="agenda-index">03</span>
-                <div>
-                  <div class="agenda-title">Systems &amp; data</div>
-                  <div class="agenda-sub">Data structure and integration paths.</div>
-                </div>
-              </li>
-              <li class="agenda-item">
-                <span class="agenda-index">04</span>
-                <div>
-                  <div class="agenda-title">Fixed-price plan</div>
-                  <div class="agenda-sub">MVP priorities and clear milestones.</div>
-                </div>
-              </li>
-            </ol>
+            <div class="stage-card" aria-label="Discovery call agenda">
+              <div class="card-head">
+                <span class="card-title">Discovery session</span>
+                <span class="card-meta">30 min · Teams</span>
+              </div>
+              <ol class="minimal-agenda">
+                <li class="agenda-item">
+                  <span class="agenda-index">01</span>
+                  <div>
+                    <div class="agenda-title">Workflow &amp; bottlenecks</div>
+                    <div class="agenda-sub">Tools, handoffs and daily friction.</div>
+                  </div>
+                </li>
+                <li class="agenda-item">
+                  <span class="agenda-index">02</span>
+                  <div>
+                    <div class="agenda-title">Goals &amp; roles</div>
+                    <div class="agenda-sub">KPIs, permissions and approval flows.</div>
+                  </div>
+                </li>
+                <li class="agenda-item">
+                  <span class="agenda-index">03</span>
+                  <div>
+                    <div class="agenda-title">Systems &amp; data</div>
+                    <div class="agenda-sub">Data structure and integration paths.</div>
+                  </div>
+                </li>
+                <li class="agenda-item">
+                  <span class="agenda-index">04</span>
+                  <div>
+                    <div class="agenda-title">Fixed-price plan</div>
+                    <div class="agenda-sub">MVP priorities and clear milestones.</div>
+                  </div>
+                </li>
+              </ol>
+            </div>
           </div>
         </div>
       </section>
@@ -178,41 +184,47 @@
       <section class="stage" id="stage-preparation" data-stage="stage-preparation">
         <div class="stage-container stage-split is-reversed">
           <div class="split-slot slot-visual">
-            <div class="minimal-arch" aria-label="System architecture blueprint">
-              <div class="arch-pair">
-                <div class="arch-tile">
-                  <span class="arch-name">Xero · MYOB</span>
-                  <span class="arch-role">Accounting API</span>
-                </div>
-                <div class="arch-tile">
-                  <span class="arch-name">Shopify · CRM</span>
-                  <span class="arch-role">Orders &amp; Leads</span>
-                </div>
+            <div class="stage-card" aria-label="System architecture blueprint">
+              <div class="card-head">
+                <span class="card-title">System blueprint</span>
+                <span class="card-meta">AWS Sydney · ap-southeast-2</span>
               </div>
-
-              <svg class="arch-lines" viewBox="0 0 260 32" preserveAspectRatio="none" aria-hidden="true">
-                <path d="M65 0 C65 18, 114 16, 122 32" fill="none" stroke="rgba(124, 58, 237, 0.36)" stroke-width="1.25" />
-                <path d="M195 0 C195 18, 146 16, 138 32" fill="none" stroke="rgba(124, 58, 237, 0.36)" stroke-width="1.25" />
-              </svg>
-
-              <div class="arch-core-tile">
-                <span class="arch-name">Custom App Core</span>
-                <span class="arch-role">REST · Webhooks · Auth</span>
-              </div>
-
-              <svg class="arch-lines" viewBox="0 0 260 32" preserveAspectRatio="none" aria-hidden="true">
-                <path d="M122 0 C112 16, 80 16, 65 32" fill="none" stroke="rgba(100, 116, 139, 0.34)" stroke-width="1.25" stroke-dasharray="3 4" />
-                <path d="M138 0 C148 16, 180 16, 195 32" fill="none" stroke="rgba(100, 116, 139, 0.34)" stroke-width="1.25" stroke-dasharray="3 4" />
-              </svg>
-
-              <div class="arch-pair">
-                <div class="arch-tile is-muted">
-                  <span class="arch-name">PostgreSQL</span>
-                  <span class="arch-role">Primary Data</span>
+              <div class="minimal-arch">
+                <div class="arch-pair">
+                  <div class="arch-tile">
+                    <span class="arch-name">Xero · MYOB</span>
+                    <span class="arch-role">Accounting API</span>
+                  </div>
+                  <div class="arch-tile">
+                    <span class="arch-name">Shopify · CRM</span>
+                    <span class="arch-role">Orders &amp; Leads</span>
+                  </div>
                 </div>
-                <div class="arch-tile is-muted">
-                  <span class="arch-name">AWS Sydney</span>
-                  <span class="arch-role">ap-southeast-2</span>
+
+                <svg class="arch-lines" viewBox="0 0 260 28" preserveAspectRatio="none" aria-hidden="true">
+                  <path d="M65 0 C65 16, 114 14, 122 28" fill="none" stroke="rgba(124, 58, 237, 0.36)" stroke-width="1.25" />
+                  <path d="M195 0 C195 16, 146 14, 138 28" fill="none" stroke="rgba(124, 58, 237, 0.36)" stroke-width="1.25" />
+                </svg>
+
+                <div class="arch-core-tile">
+                  <span class="arch-name">Custom App Core</span>
+                  <span class="arch-role">REST · Webhooks · Auth</span>
+                </div>
+
+                <svg class="arch-lines" viewBox="0 0 260 28" preserveAspectRatio="none" aria-hidden="true">
+                  <path d="M122 0 C112 14, 80 14, 65 28" fill="none" stroke="rgba(100, 116, 139, 0.34)" stroke-width="1.25" stroke-dasharray="3 4" />
+                  <path d="M138 0 C148 14, 180 14, 195 28" fill="none" stroke="rgba(100, 116, 139, 0.34)" stroke-width="1.25" stroke-dasharray="3 4" />
+                </svg>
+
+                <div class="arch-pair">
+                  <div class="arch-tile is-muted">
+                    <span class="arch-name">PostgreSQL</span>
+                    <span class="arch-role">Primary Data</span>
+                  </div>
+                  <div class="arch-tile is-muted">
+                    <span class="arch-name">Worker Queue</span>
+                    <span class="arch-role">Sync &amp; Alerts</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -238,10 +250,10 @@
             <span class="axis-anchor offset-left" data-waypoint="w-build"></span>
           </div>
           <div class="split-slot slot-visual">
-            <div class="minimal-sheet" aria-label="Sprint progress milestones">
-              <div class="sheet-head">
-                <span class="sheet-title">Field Service Platform</span>
-                <span class="sheet-meta">Sprint 03 of 06</span>
+            <div class="stage-card" aria-label="Sprint progress milestones">
+              <div class="card-head">
+                <span class="card-title">Field Service Platform</span>
+                <span class="card-meta">Sprint 03 of 06</span>
               </div>
               <ul class="milestone-list">
                 <li class="milestone-row is-done">
@@ -278,10 +290,10 @@
       <section class="stage" id="stage-testing" data-stage="stage-testing">
         <div class="stage-container stage-split is-reversed">
           <div class="split-slot slot-visual">
-            <div class="minimal-sheet" aria-label="Working preview and live feedback">
-              <div class="sheet-head">
-                <span class="sheet-title">Today’s dispatch preview</span>
-                <span class="sheet-meta">Tuesday · 19 May</span>
+            <div class="stage-card" aria-label="Working preview and live feedback">
+              <div class="card-head">
+                <span class="card-title">Today’s dispatch preview</span>
+                <span class="card-meta">Tuesday · 19 May</span>
               </div>
               <div class="dispatch-list" id="dispatch-list">
                 <div class="dispatch-row is-priority" data-job="urgent">
